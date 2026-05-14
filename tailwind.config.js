@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
+  // Disable preflight so Carbon's CSS reset takes precedence
+  corePlugins: { preflight: false },
   theme: {
     extend: {
       colors: {
@@ -19,7 +21,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"IBM Plex Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['"IBM Plex Sans"', 'sans-serif'],
       },
     },
   },

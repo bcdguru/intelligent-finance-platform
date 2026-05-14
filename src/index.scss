@@ -1,0 +1,87 @@
+@use '@carbon/react';
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+// ── Layout shell ───────────────────────────────────────────────────────────
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// ── Animations ─────────────────────────────────────────────────────────────
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.slide-in { animation: slide-in 0.2s ease-out; }
+
+@keyframes count-up {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.count-up { animation: count-up 0.35s ease-out; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
+
+// ── Carbon overrides ────────────────────────────────────────────────────────
+.cds--header {
+  border-bottom: 1px solid #393939;
+}
+
+// Tab bar below header — contained style
+.cds--tabs--contained .cds--tabs__nav-link {
+  height: 3rem;
+}
+
+// Smooth tab panels
+.cds--tab-content {
+  padding: 0;
+}
+
+// Matrix cell tiles
+.matrix-tile {
+  min-height: 5rem;
+  padding: 0.5rem;
+
+  .cds--tile {
+    padding: 0.5rem;
+    min-height: 5rem;
+  }
+}
+
+// Workbench overlay scrollbar
+.workbench-body::-webkit-scrollbar { width: 4px; }
+.workbench-body::-webkit-scrollbar-track { background: #f4f4f4; }
+.workbench-body::-webkit-scrollbar-thumb { background: #c6c6c6; border-radius: 2px; }
+
+// Progress bar custom height
+.cds--progress-bar__bar { height: 6px; }
+.cds--progress-bar__track { height: 6px; }
+
+// Mono font for evidence hashes
+.mono { font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+
+// Module accent border on tabs
+.tab-r2r  .cds--tabs__nav-item--selected .cds--tabs__nav-link { border-bottom-color: #156082 !important; }
+.tab-o2c  .cds--tabs__nav-item--selected .cds--tabs__nav-link { border-bottom-color: #E97132 !important; }
+.tab-s2p  .cds--tabs__nav-item--selected .cds--tabs__nav-link { border-bottom-color: #196B24 !important; }
+.tab-fpa  .cds--tabs__nav-item--selected .cds--tabs__nav-link { border-bottom-color: #A02B93 !important; }
+
+// Structured list compact
+.cds--structured-list { margin-bottom: 0; }
+.cds--structured-list-td { padding-block: 0.5rem; }
+.cds--structured-list-th { padding-block: 0.375rem; }
+
+// Make modal scrollable for tall content
+.cds--modal-container { max-height: 90vh; }
+.cds--modal-content { overflow-y: auto; }

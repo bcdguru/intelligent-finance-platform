@@ -1,59 +1,101 @@
-import { Users } from 'lucide-react'
+import { Tag } from '@carbon/react'
+import { User } from '@carbon/icons-react'
 
 export default function PersonaSidebar({ module, activePersona, onPersonaSelect }) {
-  const wave1Personas = module.personas.filter(p => p.wave === 1)
-  const futurePersonas = module.personas.filter(p => p.wave > 1)
+  const wave1 = module.personas.filter(p => p.wave === 1)
+  const future = module.personas.filter(p => p.wave > 1)
 
   return (
-    <aside className="w-48 flex-shrink-0 bg-white border-r border-brand-silver flex flex-col">
-      <div className="p-3 border-b border-brand-silver">
-        <div className="flex items-center gap-1.5 text-[10px] font-bold text-brand-teal uppercase tracking-widest">
-          <Users size={11} />
+    <div style={{
+      width: 180,
+      flexShrink: 0,
+      background: '#ffffff',
+      borderRight: '1px solid #e0e0e0',
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+    }}>
+      {/* Header */}
+      <div style={{
+        padding: '0.625rem 1rem',
+        borderBottom: '1px solid #e0e0e0',
+        display: 'flex', alignItems: 'center', gap: '0.375rem',
+      }}>
+        <User size={14} color="#525252" />
+        <span style={{ fontSize: 11, fontWeight: 700, color: '#161616', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Personas
-        </div>
+        </span>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
-        {wave1Personas.map(p => (
-          <button
-            key={p.id}
-            onClick={() => onPersonaSelect(p.id)}
-            className={`w-full text-left px-2.5 py-2 rounded-lg text-[11px] transition-all ${
-              activePersona === p.id
-                ? 'bg-brand-teal text-white font-semibold shadow-sm'
-                : 'text-brand-ink hover:bg-brand-silver/40'
-            }`}
-          >
-            {p.label}
-          </button>
-        ))}
+      {/* List */}
+      <div style={{ flex: 1, overflowY: 'auto' }}>
+        {/* Active wave */}
+        <div style={{ padding: '0.5rem 0' }}>
+          {wave1.map(p => {
+            const active = activePersona === p.id
+            return (
+              <button
+                key={p.id}
+                onClick={() => onPersonaSelect(p.id)}
+                style={{
+                  width: '100%',
+                  textAlign: 'left',
+                  padding: '0.5rem 1rem',
+                  fontSize: 12,
+                  fontFamily: 'IBM Plex Sans, sans-serif',
+                  fontWeight: active ? 600 : 400,
+                  color: active ? '#ffffff' : '#161616',
+                  background: active ? '#156082' : 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background 0.1s',
+                  borderLeft: active ? '3px solid #0f9ed5' : '3px solid transparent',
+                }}
+                onMouseEnter={e => { if (!active) e.currentTarget.style.background = '#f4f4f4' }}
+                onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent' }}
+              >
+                {p.label}
+              </button>
+            )
+          })}
+        </div>
 
-        {futurePersonas.length > 0 && (
+        {/* Future waves */}
+        {future.length > 0 && (
           <>
-            <div className="px-2.5 pt-3 pb-1 text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+            <div style={{
+              padding: '0.375rem 1rem',
+              fontSize: 10, fontWeight: 700, color: '#8d8d8d',
+              textTransform: 'uppercase', letterSpacing: '0.08em',
+              borderTop: '1px solid #e0e0e0',
+            }}>
               Future Waves
             </div>
-            {futurePersonas.map(p => (
-              <div
-                key={p.id}
-                className="w-full text-left px-2.5 py-2 rounded-lg text-[11px] text-gray-400 flex items-center justify-between"
-              >
+            {future.map(p => (
+              <div key={p.id} style={{
+                padding: '0.4rem 1rem',
+                fontSize: 12, color: '#a8a8a8',
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              }}>
                 <span>{p.label}</span>
-                <span className="text-[8px] px-1 py-0.5 rounded bg-gray-100 text-gray-400">
-                  W{p.wave}
-                </span>
+                <span style={{
+                  fontSize: 9, fontWeight: 700, padding: '1px 5px',
+                  background: '#e0e0e0', color: '#6f6f6f', borderRadius: 2,
+                }}>W{p.wave}</span>
               </div>
             ))}
           </>
         )}
       </div>
 
-      <div className="p-3 border-t border-brand-silver">
-        <div className="text-[9px] text-gray-400 text-center">
-          {module.personas.filter(p => p.wave === 1).length} active ·{' '}
-          {module.personas.length} total
-        </div>
+      {/* Footer */}
+      <div style={{
+        padding: '0.5rem 1rem',
+        borderTop: '1px solid #e0e0e0',
+        fontSize: 10, color: '#8d8d8d', textAlign: 'center',
+      }}>
+        {wave1.length} active · {module.personas.length} total
       </div>
-    </aside>
+    </div>
   )
 }

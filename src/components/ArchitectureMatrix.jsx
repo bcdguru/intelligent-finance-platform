@@ -1,61 +1,85 @@
 import { useState } from 'react'
 
-const LAYER_COLORS = {
-  compliance:    { bg: '#EEF6FF', border: '#156082', text: '#156082' },
-  analysis:      { bg: '#F0FBF0', border: '#196B24', text: '#196B24' },
-  orchestration: { bg: '#FFF7F0', border: '#E97132', text: '#E97132' },
-  action:        { bg: '#F5EFFF', border: '#A02B93', text: '#A02B93' },
-  integration:   { bg: '#F0F9FF', border: '#0F9ED5', text: '#0F9ED5' },
+const LAYER_META = {
+  compliance:    { label: 'Compliance',    bg: '#e5f6ff', accent: '#0072c3', text: '#0072c3' },
+  analysis:      { label: 'Analysis',      bg: '#defbe6', accent: '#24a148', text: '#0e6027' },
+  orchestration: { label: 'Orchestration', bg: '#fff8e1', accent: '#f1c21b', text: '#7a4f00' },
+  action:        { label: 'Action',        bg: '#ffd6e8', accent: '#d12771', text: '#9f1853' },
+  integration:   { label: 'Integration',   bg: '#f4f4f4', accent: '#8d8d8d', text: '#525252' },
 }
 
-const AGENT_COLORS = {
-  'Journal Agent':         '#156082',
-  'Reconciliation Agent':  '#196B24',
-  'Close Agent':           '#E97132',
-  'Control Agent':         '#A02B93',
-  'Interco Agent':         '#0961FD',
-  'Cash Agent':            '#4EA72E',
-  'Asset Agent':           '#0E2841',
-  'Reporting Agent':       '#156082',
-  'Monitor Agent':         '#E97132',
-  'Orchestration Agent':   '#C1C7CD',
-  'Extraction/Data Agent': '#8B9CB0',
-  'Flux Agent':            '#0F9ED5',
-  'Contract Agent':        '#A02B93',
-  'Forecasting Agent':     '#196B24',
-  'Performance Agent':     '#E97132',
+const AGENT_META = {
+  'Journal Agent':         { bg: '#e5f6ff', color: '#0072c3' },
+  'Reconciliation Agent':  { bg: '#defbe6', color: '#24a148' },
+  'Close Agent':           { bg: '#fff8e1', color: '#7a4f00' },
+  'Control Agent':         { bg: '#ffd6e8', color: '#9f1853' },
+  'Interco Agent':         { bg: '#e8daff', color: '#6929c4' },
+  'Cash Agent':            { bg: '#defbe6', color: '#0e6027' },
+  'Asset Agent':           { bg: '#f4f4f4', color: '#393939' },
+  'Reporting Agent':       { bg: '#e5f6ff', color: '#0072c3' },
+  'Monitor Agent':         { bg: '#fff8e1', color: '#7a4f00' },
+  'Orchestration Agent':   { bg: '#f4f4f4', color: '#6f6f6f' },
+  'Extraction/Data Agent': { bg: '#f4f4f4', color: '#8d8d8d' },
+  'Flux Agent':            { bg: '#e5f6ff', color: '#0072c3' },
+  'Contract Agent':        { bg: '#e8daff', color: '#6929c4' },
+  'Forecasting Agent':     { bg: '#defbe6', color: '#0e6027' },
+  'Performance Agent':     { bg: '#fff8e1', color: '#7a4f00' },
+  'Journal Scheduler':     { bg: '#e5f6ff', color: '#0072c3' },
+  'Capital Spend Agent':   { bg: '#f4f4f4', color: '#393939' },
+  'Project & Asset Master Agent': { bg: '#defbe6', color: '#0e6027' },
 }
 
 function AgentChip({ name, isWorkbench, onClick }) {
-  const color = AGENT_COLORS[name] || '#156082'
+  const meta = AGENT_META[name] || { bg: '#e5f6ff', color: '#0072c3' }
   if (isWorkbench) {
     return (
       <button
-        onClick={() => onClick && onClick(name)}
-        className="slide-in inline-flex items-center gap-1 px-2 py-0.5 rounded text-white text-[10px] font-semibold shadow-sm hover:opacity-90 transition-opacity cursor-pointer"
-        style={{ background: color, border: `1.5px solid ${color}` }}
+        onClick={() => onClick?.(name)}
         title={`Open ${name}`}
+        style={{
+          display: 'inline-flex', alignItems: 'center', gap: 4,
+          padding: '2px 7px', borderRadius: 2,
+          fontSize: 10, fontWeight: 600, fontFamily: 'IBM Plex Sans, sans-serif',
+          background: meta.color, color: '#fff',
+          border: 'none', cursor: 'pointer',
+          marginBottom: 3, lineHeight: '18px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+          transition: 'opacity 0.15s',
+        }}
+        onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+        onMouseLeave={e => e.currentTarget.style.opacity = '1'}
       >
-        <span className="text-[8px]">⬡</span>
-        {name}
+        ⬡ {name}
       </button>
     )
   }
   return (
-    <span
-      className="slide-in inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium"
-      style={{ background: `${color}18`, color, border: `1px solid ${color}40` }}
-    >
+    <span style={{
+      display: 'inline-flex', alignItems: 'center',
+      padding: '1px 6px', borderRadius: 2,
+      fontSize: 10, fontWeight: 500, fontFamily: 'IBM Plex Sans, sans-serif',
+      background: meta.bg, color: meta.color,
+      border: `1px solid ${meta.color}30`,
+      marginBottom: 2, lineHeight: '16px',
+    }}>
       {name}
     </span>
   )
 }
 
-function Cell({ cell, onWorkbenchClick }) {
-  if (!cell) return <td className="border border-brand-silver bg-white/40 p-1" />
+function MatrixCell({ cell, onWorkbenchClick }) {
+  if (!cell) {
+    return <td style={{ border: '1px solid #e0e0e0', background: '#fafafa', width: 130 }} />
+  }
   return (
-    <td className="border border-brand-silver bg-white/60 p-1.5 align-top">
-      <div className="flex flex-col gap-1">
+    <td style={{
+      border: '1px solid #e0e0e0',
+      background: '#ffffff',
+      padding: '6px 8px',
+      verticalAlign: 'top',
+      width: 130,
+    }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         {cell.agents.map(a => (
           <AgentChip key={a} name={a} isWorkbench={false} />
         ))}
@@ -68,54 +92,79 @@ function Cell({ cell, onWorkbenchClick }) {
 }
 
 export default function ArchitectureMatrix({ module, onWorkbenchClick }) {
-  const [hoveredArea, setHoveredArea] = useState(null)
+  const [hoveredCol, setHoveredCol] = useState(null)
 
   return (
-    <div className="overflow-x-auto">
-      <table className="border-collapse w-full text-xs" style={{ minWidth: 900 }}>
-        <thead>
-          {/* Process Area header row */}
-          <tr>
-            <th className="w-24 border border-brand-silver bg-brand-navy text-white text-[10px] font-semibold p-2 text-center">
-              <div>L3</div>
+    <table style={{
+      borderCollapse: 'collapse',
+      width: '100%',
+      minWidth: 820,
+      fontSize: 11,
+      fontFamily: 'IBM Plex Sans, sans-serif',
+    }}>
+      <thead>
+        <tr>
+          <th style={{
+            width: 80, background: '#161616', color: '#f4f4f4',
+            border: '1px solid #393939', padding: '6px 8px',
+            fontSize: 10, fontWeight: 600, textAlign: 'center',
+            textTransform: 'uppercase', letterSpacing: '0.06em',
+          }}>
+            Layer
+          </th>
+          {module.processAreas.map(area => (
+            <th
+              key={area.id}
+              style={{
+                background: hoveredCol === area.id ? area.color : area.color + 'cc',
+                color: '#fff',
+                border: '1px solid ' + area.color,
+                padding: '6px 8px',
+                fontSize: 10, fontWeight: 600,
+                textAlign: 'center',
+                cursor: 'default',
+                transition: 'background 0.15s',
+                width: 130,
+              }}
+              onMouseEnter={() => setHoveredCol(area.id)}
+              onMouseLeave={() => setHoveredCol(null)}
+            >
+              <div style={{ fontWeight: 700 }}>{area.label}</div>
+              <div style={{ fontWeight: 400, opacity: 0.85, marginTop: 2, fontSize: 9 }}>{area.sub}</div>
             </th>
-            {module.processAreas.map(area => (
-              <th
-                key={area.id}
-                className="border border-brand-silver text-white text-[10px] font-semibold p-2 text-center cursor-pointer transition-opacity"
-                style={{ background: area.color, opacity: hoveredArea && hoveredArea !== area.id ? 0.75 : 1 }}
-                onMouseEnter={() => setHoveredArea(area.id)}
-                onMouseLeave={() => setHoveredArea(null)}
-              >
-                <div className="font-bold">{area.label}</div>
-                <div className="font-normal opacity-80 mt-0.5">{area.sub}</div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {module.layers.map(layer => {
-            const lc = LAYER_COLORS[layer.id] || LAYER_COLORS.integration
-            return (
-              <tr key={layer.id}>
-                <td
-                  className="border border-brand-silver text-center font-semibold text-[10px] p-2 w-24"
-                  style={{ background: lc.bg, color: lc.text, borderLeft: `3px solid ${lc.border}` }}
-                >
-                  {layer.label}
-                </td>
-                {module.processAreas.map(area => (
-                  <Cell
-                    key={area.id}
-                    cell={layer.cells[area.id]}
-                    onWorkbenchClick={onWorkbenchClick}
-                  />
-                ))}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </div>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {module.layers.map(layer => {
+          const lm = LAYER_META[layer.id] || LAYER_META.integration
+          return (
+            <tr key={layer.id}>
+              <td style={{
+                background: lm.bg,
+                color: lm.text,
+                border: '1px solid #e0e0e0',
+                borderLeft: `3px solid ${lm.accent}`,
+                padding: '6px 8px',
+                fontWeight: 600,
+                fontSize: 10,
+                textAlign: 'center',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+              }}>
+                {lm.label}
+              </td>
+              {module.processAreas.map(area => (
+                <MatrixCell
+                  key={area.id}
+                  cell={layer.cells[area.id]}
+                  onWorkbenchClick={onWorkbenchClick}
+                />
+              ))}
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
   )
 }

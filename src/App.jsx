@@ -1,15 +1,19 @@
 import { useState } from 'react'
+import { Theme } from '@carbon/react'
 import TopNav from './components/TopNav'
 import ModuleView from './components/ModuleView'
 import { MODULES } from './data/modules'
 
 export default function App() {
   const [activeModule, setActiveModule] = useState('r2r')
-
   return (
-    <div className="flex flex-col h-screen bg-gray-50 overflow-hidden">
-      <TopNav activeModule={activeModule} onModuleChange={setActiveModule} />
-      <ModuleView key={activeModule} module={MODULES[activeModule]} />
-    </div>
+    <Theme theme="white">
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+        <Theme theme="g100">
+          <TopNav activeModule={activeModule} onModuleChange={setActiveModule} />
+        </Theme>
+        <ModuleView key={activeModule} module={MODULES[activeModule]} onModuleChange={setActiveModule} />
+      </div>
+    </Theme>
   )
 }

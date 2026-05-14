@@ -1,24 +1,35 @@
-import { Code2, CheckCircle } from 'lucide-react'
+import { Tag } from '@carbon/react'
+import { Code } from '@carbon/icons-react'
 
 export default function SkillsPanel({ module }) {
   return (
-    <div className="p-4 bg-white rounded-xl border border-brand-silver shadow-sm slide-in">
-      <div className="flex items-center gap-2 mb-3">
-        <Code2 size={14} className="text-brand-teal" />
-        <span className="text-[11px] font-bold text-brand-ink uppercase tracking-wide">
-          Skills · Skill-as-Code
+    <div style={{
+      background: '#ffffff',
+      border: '1px solid #e0e0e0',
+      padding: '0.75rem 1rem',
+    }}>
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: '0.5rem',
+        marginBottom: '0.625rem',
+      }}>
+        <Code size={14} color="#525252" />
+        <span style={{ fontSize: 11, fontWeight: 700, color: '#161616', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          Skill-as-Code
         </span>
-        <span className="ml-auto text-[10px] text-gray-400">{module.skills.length} active</span>
+        <span style={{ marginLeft: 'auto', fontSize: 11, color: '#8d8d8d' }}>
+          {module.skills.length} active
+        </span>
       </div>
-      <div className="flex flex-wrap gap-1.5">
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem' }}>
         {module.skills.map(skill => (
-          <span
+          <Tag
             key={skill}
-            className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-brand-teal/8 text-brand-teal border border-brand-teal/20 text-[10px] font-mono font-medium hover:bg-brand-teal/15 cursor-pointer transition-colors"
+            type="blue"
+            size="sm"
+            style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: 11, cursor: 'pointer' }}
           >
-            <CheckCircle size={9} className="text-brand-teal/60" />
             {skill}
-          </span>
+          </Tag>
         ))}
       </div>
     </div>

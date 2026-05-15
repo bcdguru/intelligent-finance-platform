@@ -46,6 +46,28 @@ export default function TopNav({ activeModule, onModuleChange }) {
             </HeaderMenuItem>
           )
         })}
+
+        {/* Atlas separator + entry */}
+        <HeaderMenuItem
+          isCurrentPage={activeModule === 'atlas'}
+          onClick={() => onModuleChange('atlas')}
+          style={{ cursor: 'pointer' }}
+        >
+          <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <span style={{
+              width: 14, height: 14, borderRadius: 2,
+              background: activeModule === 'atlas' ? '#f4f4f4' : 'rgba(255,255,255,0.2)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 9, flexShrink: 0, color: '#fff', fontWeight: 700,
+            }}>⬡</span>
+            <span style={{ fontWeight: activeModule === 'atlas' ? 600 : 400 }}>Atlas</span>
+            <span style={{
+              fontSize: 9, fontWeight: 700, padding: '1px 4px',
+              borderRadius: 8, background: 'rgba(120,169,255,0.2)', color: '#78a9ff',
+              border: '1px solid rgba(120,169,255,0.3)',
+            }}>All</span>
+          </span>
+        </HeaderMenuItem>
       </HeaderNavigation>
 
       <HeaderGlobalBar>

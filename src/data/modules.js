@@ -64,7 +64,7 @@ export const MODULES = {
         id: 'analysis',
         label: 'Analysis',
         cells: {
-          'general-accounting': { agents: ['Flux Agent'], workbench: 'Controller Workbench' },
+          'general-accounting': { agents: ['Flux Agent'], workbench: 'Flux Workbench' },
           'capital-accounting': { agents: ['Asset Agent'], workbench: 'Capital Workbench' },
           'controls': { agents: ['Monitor Agent'], workbench: null },
           'book-close': { agents: ['Reporting Agent', 'Forecasting Agent'], workbench: null },

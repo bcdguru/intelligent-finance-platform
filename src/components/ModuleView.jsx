@@ -7,11 +7,17 @@ import PersonaSidebar from './PersonaSidebar'
 import SkillsPanel from './SkillsPanel'
 import MetricsBar from './MetricsBar'
 import ControllerWorkbench from './workbenches/ControllerWorkbench'
+import FluxAgentWorkbench from './workbenches/FluxAgentWorkbench'
 
-const WORKBENCH_TRIGGERS = new Set([
-  'Controller Workbench', 'Journal Advisor', 'Audit Agent',
-  'Treasurer Workbench', 'Capital Workbench', 'Journal Workbench',
-])
+const WORKBENCH_MAP = {
+  'Controller Workbench': 'controller',
+  'Journal Advisor':      'controller',
+  'Audit Agent':          'controller',
+  'Treasurer Workbench':  'controller',
+  'Capital Workbench':    'controller',
+  'Journal Workbench':    'controller',
+  'Flux Workbench':       'flux',
+}
 
 const MODULE_METRICS = {
   r2r: [
@@ -47,7 +53,8 @@ export default function ModuleView({ module, onModuleChange }) {
   const metrics = MODULE_METRICS[module.id] || []
 
   const handleWorkbenchClick = (name) => {
-    if (WORKBENCH_TRIGGERS.has(name)) setOpenWorkbench('controller')
+    const target = WORKBENCH_MAP[name]
+    if (target) setOpenWorkbench(target)
   }
 
   return (
@@ -146,6 +153,9 @@ export default function ModuleView({ module, onModuleChange }) {
       {/* Workbench overlay */}
       {openWorkbench === 'controller' && isLive && (
         <ControllerWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'flux' && (
+        <FluxAgentWorkbench onClose={() => setOpenWorkbench(null)} />
       )}
       {openWorkbench === 'controller' && !isLive && (
         <div style={{

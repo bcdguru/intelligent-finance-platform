@@ -8,15 +8,19 @@ import SkillsPanel from './SkillsPanel'
 import MetricsBar from './MetricsBar'
 import ControllerWorkbench from './workbenches/ControllerWorkbench'
 import FluxAgentWorkbench from './workbenches/FluxAgentWorkbench'
+import ARWorkbench from './workbenches/ARWorkbench'
+import CollectionsWorkbench from './workbenches/CollectionsWorkbench'
 
 const WORKBENCH_MAP = {
-  'Controller Workbench': 'controller',
-  'Journal Advisor':      'controller',
-  'Audit Agent':          'controller',
-  'Treasurer Workbench':  'controller',
-  'Capital Workbench':    'controller',
-  'Journal Workbench':    'controller',
-  'Flux Workbench':       'flux',
+  'Controller Workbench':  'controller',
+  'Journal Advisor':       'controller',
+  'Audit Agent':           'controller',
+  'Treasurer Workbench':   'controller',
+  'Capital Workbench':     'controller',
+  'Journal Workbench':     'controller',
+  'Flux Workbench':        'flux',
+  'AR Director Workbench': 'ar',
+  'Collections Workbench': 'collections',
 }
 
 const MODULE_METRICS = {
@@ -156,6 +160,12 @@ export default function ModuleView({ module, onModuleChange }) {
       )}
       {openWorkbench === 'flux' && (
         <FluxAgentWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'ar' && (
+        <ARWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'collections' && (
+        <CollectionsWorkbench onClose={() => setOpenWorkbench(null)} />
       )}
       {openWorkbench === 'controller' && !isLive && (
         <div style={{

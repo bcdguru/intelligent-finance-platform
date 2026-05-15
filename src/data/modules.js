@@ -162,7 +162,7 @@ export const MODULES = {
           'billing': { agents: ['Billing Agent'], workbench: null },
           'revenue': { agents: ['Contract Agent'], workbench: null },
           'cash-app': { agents: ['Reconciliation Agent'], workbench: null },
-          'collections': { agents: ['Control Agent'], workbench: null },
+          'collections': { agents: ['Control Agent'], workbench: 'Collections Workbench' },
           'ar-mgmt': { agents: ['Reporting Agent'], workbench: 'AR Director Workbench' },
           'contract': { agents: ['Contract Agent'], workbench: null },
         },
@@ -225,9 +225,9 @@ export const MODULES = {
     personas: [
       { id: 'billing-spec', label: 'Billing Specialist', wave: 3, active: false },
       { id: 'cash-app-spec', label: 'Cash Application Specialist', wave: 3, active: false },
-      { id: 'collections-analyst', label: 'Credit & Collections Analyst', wave: 3, active: false },
+      { id: 'collections-analyst', label: 'Credit & Collections Analyst', wave: 3, active: true },
       { id: 'revenue-accountant', label: 'Revenue Accountant', wave: 3, active: false },
-      { id: 'ar-director', label: 'AR Manager / Director of O2C', wave: 3, active: false },
+      { id: 'ar-director', label: 'AR Manager / Director of O2C', wave: 3, active: true },
       { id: 'pricing-analyst', label: 'Contract & Pricing Analyst', wave: 3, active: false },
     ],
     skills: [

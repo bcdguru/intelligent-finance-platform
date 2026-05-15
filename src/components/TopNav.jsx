@@ -5,18 +5,22 @@ import {
 import { Notification, UserAvatar, Activity } from '@carbon/icons-react'
 import { MODULES, MODULE_ORDER } from '../data/modules'
 
+const C = { navy: '#1e293b', teal: '#0891b2', border: '#334155', muted: '#94a3b8' }
+
 export default function TopNav({ activeModule, onModuleChange }) {
   return (
-    <Header aria-label="Intelligent Finance Platform">
+    <Header aria-label="Intelligent Finance Platform" style={{ background: C.navy, borderBottom: `1px solid ${C.border}` }}>
       <HeaderName href="#" prefix="">
         <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span style={{
-            width: 24, height: 24, borderRadius: 4,
-            background: '#156082', display: 'flex', alignItems: 'center',
-            justifyContent: 'center', fontSize: 13, flexShrink: 0,
+            width: 26, height: 26, borderRadius: 6,
+            background: C.teal, display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontSize: 14, flexShrink: 0,
           }}>⬡</span>
-          <span style={{ fontWeight: 600, fontSize: 14 }}>Intelligent Finance Platform</span>
-          <span style={{ fontSize: 11, opacity: 0.45, fontWeight: 400 }}>Office of the CFO</span>
+          <span style={{ fontWeight: 700, fontSize: 14, color: '#f1f5f9', letterSpacing: '-0.01em' }}>
+            Intelligent Finance
+          </span>
+          <span style={{ fontSize: 11, color: C.muted, fontWeight: 400 }}>· Office of the CFO</span>
         </span>
       </HeaderName>
 
@@ -30,16 +34,19 @@ export default function TopNav({ activeModule, onModuleChange }) {
               key={id}
               isCurrentPage={active}
               onClick={() => onModuleChange(id)}
-              style={{ cursor: 'pointer' }}
+              style={{
+                cursor: 'pointer',
+                borderBottom: active ? `2px solid ${C.teal}` : '2px solid transparent',
+              }}
             >
-              <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span style={{ width: 7, height: 7, borderRadius: '50%', background: mod.color, flexShrink: 0 }} />
-                <span style={{ fontWeight: active ? 600 : 400 }}>{mod.label}</span>
+                <span style={{ fontWeight: active ? 600 : 400, fontSize: 13 }}>{mod.label}</span>
                 {isLive && (
                   <span style={{
-                    fontSize: 9, fontWeight: 700, padding: '1px 4px',
-                    borderRadius: 8, background: '#24a14822', color: '#24a148',
-                    border: '1px solid #24a14844',
+                    fontSize: 9, fontWeight: 700, padding: '1px 5px',
+                    borderRadius: 10, background: 'rgba(5,150,105,0.2)', color: '#34d399',
+                    border: '1px solid rgba(52,211,153,0.3)',
                   }}>Live</span>
                 )}
               </span>
@@ -47,24 +54,26 @@ export default function TopNav({ activeModule, onModuleChange }) {
           )
         })}
 
-        {/* Atlas separator + entry */}
         <HeaderMenuItem
           isCurrentPage={activeModule === 'atlas'}
           onClick={() => onModuleChange('atlas')}
-          style={{ cursor: 'pointer' }}
+          style={{
+            cursor: 'pointer',
+            borderBottom: activeModule === 'atlas' ? `2px solid ${C.teal}` : '2px solid transparent',
+          }}
         >
           <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <span style={{
-              width: 14, height: 14, borderRadius: 2,
-              background: activeModule === 'atlas' ? '#f4f4f4' : 'rgba(255,255,255,0.2)',
+              width: 14, height: 14, borderRadius: 3,
+              background: activeModule === 'atlas' ? C.teal : 'rgba(255,255,255,0.15)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 9, flexShrink: 0, color: '#fff', fontWeight: 700,
             }}>⬡</span>
-            <span style={{ fontWeight: activeModule === 'atlas' ? 600 : 400 }}>Atlas</span>
+            <span style={{ fontWeight: activeModule === 'atlas' ? 600 : 400, fontSize: 13 }}>Atlas</span>
             <span style={{
-              fontSize: 9, fontWeight: 700, padding: '1px 4px',
-              borderRadius: 8, background: 'rgba(120,169,255,0.2)', color: '#78a9ff',
-              border: '1px solid rgba(120,169,255,0.3)',
+              fontSize: 9, fontWeight: 700, padding: '1px 5px',
+              borderRadius: 10, background: 'rgba(8,145,178,0.2)', color: '#67e8f9',
+              border: '1px solid rgba(103,232,249,0.3)',
             }}>All</span>
           </span>
         </HeaderMenuItem>

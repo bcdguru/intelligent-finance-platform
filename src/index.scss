@@ -14,6 +14,12 @@ html, body, #root {
   overflow: hidden;
 }
 
+// Carbon Header is position:fixed by default — override to keep it in flow
+.cds--header {
+  position: relative !important;
+  top: auto !important;
+}
+
 // ── Animations ─────────────────────────────────────────────────────────────
 @keyframes slide-in {
   from { opacity: 0; transform: translateY(6px); }

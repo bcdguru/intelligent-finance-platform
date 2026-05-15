@@ -5,29 +5,25 @@ import {
 import { Notification, UserAvatar, Activity } from '@carbon/icons-react'
 import { MODULES, MODULE_ORDER } from '../data/modules'
 
-const WAVE_STATUS = { 1: { label: 'Live', color: '#42be65' }, 2: { label: 'W2', color: '#78a9ff' }, 3: { label: 'W3', color: '#78a9ff' }, 4: { label: 'W4', color: '#78a9ff' }, 5: { label: 'W5', color: '#78a9ff' } }
-
 export default function TopNav({ activeModule, onModuleChange }) {
   return (
     <Header aria-label="Intelligent Finance Platform">
       <HeaderName href="#" prefix="">
         <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span style={{
-            width: 28, height: 28, borderRadius: 6,
+            width: 24, height: 24, borderRadius: 4,
             background: '#156082', display: 'flex', alignItems: 'center',
-            justifyContent: 'center', fontSize: 14, flexShrink: 0,
+            justifyContent: 'center', fontSize: 13, flexShrink: 0,
           }}>⬡</span>
-          <span>
-            <span style={{ fontWeight: 600, fontSize: 14 }}>Intelligent Finance Platform</span>
-            <span style={{ fontSize: 11, opacity: 0.5, marginLeft: 8, fontWeight: 400 }}>Office of the CFO</span>
-          </span>
+          <span style={{ fontWeight: 600, fontSize: 14 }}>Intelligent Finance Platform</span>
+          <span style={{ fontSize: 11, opacity: 0.45, fontWeight: 400 }}>Office of the CFO</span>
         </span>
       </HeaderName>
 
       <HeaderNavigation aria-label="Finance modules">
         {MODULE_ORDER.map(id => {
           const mod = MODULES[id]
-          const ws = WAVE_STATUS[mod.wave]
+          const isLive = mod.wave === 1
           const active = activeModule === id
           return (
             <HeaderMenuItem
@@ -36,19 +32,16 @@ export default function TopNav({ activeModule, onModuleChange }) {
               onClick={() => onModuleChange(id)}
               style={{ cursor: 'pointer' }}
             >
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{
-                  width: 8, height: 8, borderRadius: '50%',
-                  background: mod.color, flexShrink: 0,
-                }} />
+              <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                <span style={{ width: 7, height: 7, borderRadius: '50%', background: mod.color, flexShrink: 0 }} />
                 <span style={{ fontWeight: active ? 600 : 400 }}>{mod.label}</span>
-                <span style={{
-                  fontSize: 9, fontWeight: 700, padding: '1px 5px',
-                  borderRadius: 10, background: ws.color + '22',
-                  color: ws.color, border: `1px solid ${ws.color}44`,
-                }}>
-                  {ws.label}
-                </span>
+                {isLive && (
+                  <span style={{
+                    fontSize: 9, fontWeight: 700, padding: '1px 4px',
+                    borderRadius: 8, background: '#24a14822', color: '#24a148',
+                    border: '1px solid #24a14844',
+                  }}>Live</span>
+                )}
               </span>
             </HeaderMenuItem>
           )
@@ -62,7 +55,7 @@ export default function TopNav({ activeModule, onModuleChange }) {
         <HeaderGlobalAction aria-label="Notifications" tooltipAlignment="end">
           <Notification size={20} />
         </HeaderGlobalAction>
-        <HeaderGlobalAction aria-label="User profile" tooltipAlignment="end">
+        <HeaderGlobalAction aria-label="User" tooltipAlignment="end">
           <UserAvatar size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>

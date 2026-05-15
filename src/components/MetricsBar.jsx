@@ -2,10 +2,8 @@ export default function MetricsBar({ metrics, color }) {
   return (
     <div style={{
       display: 'flex',
-      gap: 0,
       borderTop: '1px solid #e0e0e0',
-      marginLeft: -24,
-      marginRight: -24,
+      marginTop: '0.75rem',
     }}>
       {metrics.map((m, i) => (
         <div key={m.label} style={{
@@ -13,6 +11,7 @@ export default function MetricsBar({ metrics, color }) {
           padding: '0.625rem 1rem',
           borderRight: i < metrics.length - 1 ? '1px solid #e0e0e0' : 'none',
           borderTop: `2px solid ${i === 0 ? color : 'transparent'}`,
+          marginTop: -1,
         }}>
           <div style={{ fontSize: 22, fontWeight: 700, color: '#161616', lineHeight: 1 }} className="count-up">
             {m.value}

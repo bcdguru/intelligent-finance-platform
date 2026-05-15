@@ -66,46 +66,38 @@ export default function ModuleView({ module, onModuleChange }) {
         <div style={{
           background: '#ffffff',
           borderBottom: '1px solid #e0e0e0',
-          padding: '1rem 1.5rem 0',
+          padding: '0.875rem 1.5rem',
           flexShrink: 0,
         }}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                <span style={{
-                  width: 10, height: 10, borderRadius: '50%',
-                  background: module.color, flexShrink: 0,
-                }} />
-                <h1 style={{ fontSize: 18, fontWeight: 600, color: '#161616', margin: 0 }}>
-                  {module.fullName}
-                </h1>
-                {isLive ? (
-                  <Tag type="green" size="sm">Wave 1 · Live</Tag>
-                ) : (
-                  <Tag type="blue" size="sm">Wave {module.wave} · Roadmap</Tag>
-                )}
-              </div>
-              <p style={{ fontSize: 13, color: '#525252', margin: 0 }}>{module.tagline}</p>
-            </div>
-
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              {!isLive && (
-                <p style={{ fontSize: 12, color: '#8d8d8d', margin: 0 }}>
-                  Weeks {(module.wave - 1) * 12 + 1}–{module.wave * 12}
-                </p>
-              )}
-              {isLive && (
-                <Button
-                  size="sm"
-                  kind="primary"
-                  renderIcon={Launch}
-                  onClick={() => setOpenWorkbench('controller')}
-                  style={{ background: module.color, borderColor: module.color }}
-                >
-                  Controller Workbench
-                </Button>
+          {/* Title row */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+              <span style={{
+                width: 10, height: 10, borderRadius: '50%',
+                background: module.color, flexShrink: 0,
+              }} />
+              <span style={{ fontSize: 16, fontWeight: 600, color: '#161616' }}>
+                {module.fullName}
+              </span>
+              <span style={{ fontSize: 12, color: '#8d8d8d' }}>·</span>
+              <span style={{ fontSize: 12, color: '#525252' }}>{module.tagline}</span>
+              {isLive ? (
+                <Tag type="green" size="sm">Wave 1 · Live</Tag>
+              ) : (
+                <Tag type="blue" size="sm">Wave {module.wave} · Weeks {(module.wave - 1) * 12 + 1}–{module.wave * 12}</Tag>
               )}
             </div>
+            {isLive && (
+              <Button
+                size="sm"
+                kind="primary"
+                renderIcon={Launch}
+                onClick={() => setOpenWorkbench('controller')}
+                style={{ background: module.color, borderColor: module.color }}
+              >
+                Controller Workbench
+              </Button>
+            )}
           </div>
 
           {/* Metric strip */}

@@ -1,10 +1,19 @@
 import { useState } from 'react'
+import { Button, Tag } from '@carbon/react'
 import { Close } from '@carbon/icons-react'
 
 const C = {
-  blue: '#0369a1', teal: '#0891b2', green: '#059669', red: '#dc2626',
-  amber: '#d97706', purple: '#7c3aed', navy: '#1e293b', slate: '#475569',
-  muted: '#94a3b8', bg: '#f8fafc', border: '#e2e8f0',
+  blue:   '#0072c3',
+  teal:   '#0072c3',
+  green:  '#24a148',
+  red:    '#da1e28',
+  amber:  '#f1c21b',
+  purple: '#6929c4',
+  navy:   '#0E2841',
+  slate:  '#525252',
+  muted:  '#8d8d8d',
+  bg:     '#f4f4f4',
+  border: '#e0e0e0',
 }
 
 // ── 13-Week Rolling Forecast ──────────────────────────────────────────────────
@@ -544,25 +553,20 @@ export default function CashLiquidityWorkbench({ onClose }) {
   const [activeTab, setActiveTab] = useState(0)
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.7)', zIndex: 9000, display: 'flex', alignItems: 'stretch', justifyContent: 'flex-end' }}>
-      <div style={{ width: '88%', maxWidth: 1160, background: C.bg, display: 'flex', flexDirection: 'column', boxShadow: '-4px 0 40px rgba(0,0,0,0.25)' }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 8000, display: 'flex', flexDirection: 'column', background: '#f4f4f4' }}>
 
         {/* Header */}
-        <div style={{ background: C.navy, borderBottom: `3px solid ${C.blue}`, padding: '0.875rem 1.5rem', flexShrink: 0 }}>
+        <div style={{ background: '#0E2841', borderBottom: '1px solid #393939', padding: '0.875rem 1.5rem', flexShrink: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 8, background: C.blue, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 700, color: '#fff', flexShrink: 0 }}>◈</div>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: '#156082', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 700, color: '#fff', flexShrink: 0 }}>⬡</div>
               <div>
                 <div style={{ color: '#f1f5f9', fontWeight: 700, fontSize: 15, letterSpacing: '-0.01em' }}>Cash & Liquidity Workbench</div>
-                <div style={{ color: C.muted, fontSize: 11, marginTop: 1 }}>Treasury Management · FY 2025 · Week of May 19</div>
+                <div style={{ color: '#8d8d8d', fontSize: 11, marginTop: 1 }}>Treasury Management · FY 2025 · Week of May 19</div>
               </div>
-              <span style={{ marginLeft: 8, fontSize: 10, fontWeight: 700, padding: '2px 9px', borderRadius: 10, background: 'rgba(5,150,105,0.2)', color: '#34d399', border: '1px solid rgba(52,211,153,0.25)' }}>
-                Live · R2R Wave 1
-              </span>
+              <Tag type="green" size="sm">Live · R2R Wave 1</Tag>
             </div>
-            <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.08)', border: `1px solid rgba(255,255,255,0.15)`, color: C.muted, cursor: 'pointer', padding: '4px 8px', borderRadius: 6, display: 'flex', alignItems: 'center' }}>
-              <Close size={16} />
-            </button>
+            <Button size="sm" kind="ghost" renderIcon={Close} iconDescription="Close" hasIconOnly onClick={onClose} />
           </div>
         </div>
 
@@ -584,7 +588,7 @@ export default function CashLiquidityWorkbench({ onClose }) {
               color: activeTab === i ? C.blue : C.slate,
               background: 'transparent', border: 'none', cursor: 'pointer',
               borderBottom: activeTab === i ? `2px solid ${C.blue}` : '2px solid transparent',
-              fontFamily: 'Inter, system-ui, sans-serif', whiteSpace: 'nowrap',
+              whiteSpace: 'nowrap',
             }}>{t}</button>
           ))}
         </div>
@@ -596,7 +600,6 @@ export default function CashLiquidityWorkbench({ onClose }) {
           {activeTab === 2 && <DebtCovenantsTab />}
           {activeTab === 3 && <LiquidityTab />}
         </div>
-      </div>
     </div>
   )
 }

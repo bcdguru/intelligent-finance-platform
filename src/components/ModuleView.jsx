@@ -12,6 +12,7 @@ import ARWorkbench from './workbenches/ARWorkbench'
 import CollectionsWorkbench from './workbenches/CollectionsWorkbench'
 import CashLiquidityWorkbench from './workbenches/CashLiquidityWorkbench'
 import JournalWorkbench from './workbenches/JournalWorkbench'
+import CapitalWorkbench from './workbenches/CapitalWorkbench'
 
 const C = {
   navy: '#1e293b', teal: '#0891b2', bg: '#f8fafc',
@@ -23,7 +24,7 @@ const WORKBENCH_MAP = {
   'Journal Advisor':       'controller',
   'Audit Agent':           'controller',
   'Treasurer Workbench':   'treasury',
-  'Capital Workbench':     'controller',
+  'Capital Workbench':     'capital',
   'Journal Workbench':     'journal',
   'Flux Workbench':        'flux',
   'AR Director Workbench': 'ar',
@@ -194,6 +195,9 @@ export default function ModuleView({ module, onModuleChange }) {
       )}
       {openWorkbench === 'journal' && (
         <JournalWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'capital' && (
+        <CapitalWorkbench onClose={() => setOpenWorkbench(null)} />
       )}
       {openWorkbench === 'controller' && !isLive && (
         <div style={{

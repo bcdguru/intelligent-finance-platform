@@ -6,17 +6,16 @@ import {
 import { Close, ArrowUp, ArrowDown } from '@carbon/icons-react'
 import { BS_ACCOUNTS, ANOMALIES, AUTO_COMMENTARY, calcTotals } from '../../data/fluxData'
 
-// agentstart-aligned palette
 const C = {
-  teal:    '#0891b2',
-  green:   '#059669',
-  red:     '#dc2626',
-  amber:   '#d97706',
-  navy:    '#1e293b',
-  slate:   '#475569',
-  muted:   '#94a3b8',
-  bg:      '#f8fafc',
-  border:  '#e2e8f0',
+  teal:   '#0072c3',
+  green:  '#24a148',
+  red:    '#da1e28',
+  amber:  '#f1c21b',
+  navy:   '#0E2841',
+  slate:  '#525252',
+  muted:  '#8d8d8d',
+  bg:     '#f4f4f4',
+  border: '#e0e0e0',
 }
 
 const fmtM     = v => `$${Math.abs(v).toFixed(1)}M`
@@ -27,38 +26,29 @@ const fmtDelta = v => `${v >= 0 ? '+' : '−'}$${Math.abs(v).toFixed(1)}M`
 function Header({ period, onPeriod, onClose }) {
   return (
     <div style={{
-      background: C.navy, color: '#f1f5f9', flexShrink: 0,
-      padding: '0.75rem 1.5rem',
-      display: 'flex', alignItems: 'center', gap: '1rem',
-      borderBottom: `3px solid ${C.teal}`,
+      background: '#0E2841', color: '#fff', flexShrink: 0,
+      padding: '0.875rem 1.5rem',
+      display: 'flex', alignItems: 'center', gap: '0.75rem',
+      borderBottom: '1px solid #393939',
     }}>
-      <span style={{
+      <div style={{
         width: 32, height: 32, borderRadius: 6,
-        background: C.teal, display: 'flex', alignItems: 'center',
+        background: '#156082', display: 'flex', alignItems: 'center',
         justifyContent: 'center', fontSize: 16, flexShrink: 0,
-      }}>⬡</span>
+      }}>⬡</div>
       <div>
-        <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em' }}>
+        <div style={{ fontSize: 15, fontWeight: 600 }}>
           Flux Agent — Variance & Anomaly Intelligence
         </div>
-        <div style={{ fontSize: 11, color: C.muted, marginTop: 1 }}>
+        <div style={{ fontSize: 11, opacity: 0.55, marginTop: 1 }}>
           R2R · General Accounting · Balance Sheet Flux
         </div>
       </div>
       <div style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center' }}>
         {['Aug 2024', 'Sep 2024', 'Oct 2024'].map(p => (
-          <button key={p} onClick={() => onPeriod(p)} style={{
-            padding: '4px 12px', border: '1px solid',
-            borderColor: period === p ? C.teal : '#334155',
-            background: period === p ? C.teal + '22' : 'transparent',
-            color: period === p ? C.teal : '#94a3b8',
-            fontSize: 11, cursor: 'pointer', borderRadius: 4,
-          }}>{p}</button>
+          <Button key={p} size="sm" kind={period === p ? 'primary' : 'ghost'} onClick={() => onPeriod(p)}>{p}</Button>
         ))}
-        <button onClick={onClose} style={{
-          background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', marginLeft: 8, padding: 4,
-        }}><Close size={20} /></button>
+        <Button size="sm" kind="ghost" renderIcon={Close} iconDescription="Close" hasIconOnly onClick={onClose} />
       </div>
     </div>
   )

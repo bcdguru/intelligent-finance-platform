@@ -3,17 +3,17 @@ import { Button, Tag, InlineNotification, ProgressBar } from '@carbon/react'
 import { Close, ArrowUp, ArrowDown } from '@carbon/icons-react'
 
 const C = {
-  orange:  '#E97132',
-  purple:  '#7c3aed',
-  green:   '#059669',
-  red:     '#dc2626',
-  amber:   '#d97706',
-  navy:    '#1e293b',
-  slate:   '#475569',
-  muted:   '#94a3b8',
-  bg:      '#f8fafc',
-  border:  '#e2e8f0',
-  teal:    '#0891b2',
+  orange: '#0072c3',
+  purple: '#6929c4',
+  green:  '#24a148',
+  red:    '#da1e28',
+  amber:  '#f1c21b',
+  navy:   '#0E2841',
+  slate:  '#525252',
+  muted:  '#8d8d8d',
+  bg:     '#f4f4f4',
+  border: '#e0e0e0',
+  teal:   '#0072c3',
 }
 
 const RISK_COLORS = { HIGH: C.red, WATCH: C.amber, MEDIUM: '#ca8a04', LOW: C.muted }
@@ -40,29 +40,27 @@ const fmt = n => n >= 1_000_000 ? `$${(n / 1_000_000).toFixed(1)}M` : `$${(n / 1
 function Header({ onClose }) {
   return (
     <div style={{
-      background: C.navy, color: '#f1f5f9', flexShrink: 0,
-      padding: '0.75rem 1.5rem',
-      display: 'flex', alignItems: 'center', gap: '1rem',
-      borderBottom: `3px solid ${C.purple}`,
+      background: '#0E2841', color: '#fff', flexShrink: 0,
+      padding: '0.875rem 1.5rem',
+      display: 'flex', alignItems: 'center', gap: '0.75rem',
+      borderBottom: '1px solid #393939',
     }}>
-      <span style={{
+      <div style={{
         width: 32, height: 32, borderRadius: 6,
-        background: C.purple, display: 'flex', alignItems: 'center',
+        background: '#156082', display: 'flex', alignItems: 'center',
         justifyContent: 'center', fontSize: 16, flexShrink: 0,
-      }}>📞</span>
+      }}>⬡</div>
       <div>
-        <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em' }}>Collections Copilot</div>
-        <div style={{ fontSize: 11, color: C.muted, marginTop: 1 }}>
-          Credit & Collections Analyst · AI-Prioritised Worklist · O2C
+        <div style={{ fontSize: 15, fontWeight: 600 }}>Collections Copilot</div>
+        <div style={{ fontSize: 11, opacity: 0.55, marginTop: 1 }}>
+          Credit & Collections Analyst · AI-Prioritised Worklist · O2C Wave 3
         </div>
       </div>
       <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
-        <span style={{ fontSize: 10, color: C.muted, fontFamily: 'IBM Plex Mono, monospace' }}>
+        <span style={{ fontSize: 11, opacity: 0.5, fontFamily: 'IBM Plex Mono, monospace' }}>
           Scored: exposure × risk × age × strategic
         </span>
-        <button onClick={onClose} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', display: 'flex', padding: 4 }}>
-          <Close size={20} />
-        </button>
+        <Button size="sm" kind="ghost" renderIcon={Close} iconDescription="Close" hasIconOnly onClick={onClose} />
       </div>
     </div>
   )
@@ -127,9 +125,9 @@ function ActionPanel({ customer, onAction, onClose }) {
       boxShadow: '-4px 0 24px rgba(0,0,0,0.12)',
     }}>
       <div style={{
-        background: C.navy, padding: '0.875rem 1rem',
+        background: '#0E2841', padding: '0.875rem 1rem',
         display: 'flex', alignItems: 'center', gap: 8,
-        borderBottom: `3px solid ${RISK_COLORS[customer.risk] || C.muted}`,
+        borderBottom: `1px solid ${RISK_COLORS[customer.risk] || '#393939'}`,
       }}>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 700, color: '#f1f5f9' }}>{customer.name}</div>

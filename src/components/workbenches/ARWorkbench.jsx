@@ -3,16 +3,16 @@ import { Button, Tag, ProgressBar, InlineNotification, Tabs, TabList, Tab, TabPa
 import { Close, ArrowUp, ArrowDown } from '@carbon/icons-react'
 
 const C = {
-  orange:  '#E97132',
-  green:   '#059669',
-  red:     '#dc2626',
-  amber:   '#d97706',
-  navy:    '#1e293b',
-  slate:   '#475569',
-  muted:   '#94a3b8',
-  bg:      '#f8fafc',
-  border:  '#e2e8f0',
-  teal:    '#0891b2',
+  orange: '#0072c3',
+  green:  '#24a148',
+  red:    '#da1e28',
+  amber:  '#f1c21b',
+  navy:   '#0E2841',
+  slate:  '#525252',
+  muted:  '#8d8d8d',
+  bg:     '#f4f4f4',
+  border: '#e0e0e0',
+  teal:   '#0072c3',
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -73,32 +73,25 @@ const AI_AGENTS = [
 function Header({ onClose }) {
   return (
     <div style={{
-      background: C.navy, color: '#f1f5f9', flexShrink: 0,
-      padding: '0.75rem 1.5rem',
-      display: 'flex', alignItems: 'center', gap: '1rem',
-      borderBottom: `3px solid ${C.orange}`,
+      background: '#0E2841', color: '#fff', flexShrink: 0,
+      padding: '0.875rem 1.5rem',
+      display: 'flex', alignItems: 'center', gap: '0.75rem',
+      borderBottom: '1px solid #393939',
     }}>
-      <span style={{
+      <div style={{
         width: 32, height: 32, borderRadius: 6,
-        background: C.orange, display: 'flex', alignItems: 'center',
+        background: '#156082', display: 'flex', alignItems: 'center',
         justifyContent: 'center', fontSize: 16, flexShrink: 0,
-      }}>⬡</span>
+      }}>⬡</div>
       <div>
-        <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em' }}>
-          AR Director Workbench
-        </div>
-        <div style={{ fontSize: 11, color: C.muted, marginTop: 1 }}>
-          Accounts Receivable · Executive Dashboard · FY 2025 · Q4
+        <div style={{ fontSize: 15, fontWeight: 600 }}>AR Director Workbench</div>
+        <div style={{ fontSize: 11, opacity: 0.55, marginTop: 1 }}>
+          Accounts Receivable · Executive Dashboard · FY 2025 · Q4 · O2C Wave 3
         </div>
       </div>
-      <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
-        <span style={{
-          fontSize: 10, fontWeight: 700, color: '#4ade80',
-          background: '#166534', padding: '3px 8px', borderRadius: 8,
-        }}>● Live · O2C Wave 3</span>
-        <button onClick={onClose} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', display: 'flex' }}>
-          <Close size={20} />
-        </button>
+      <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <Tag type="green" size="sm">Live</Tag>
+        <Button size="sm" kind="ghost" renderIcon={Close} iconDescription="Close" hasIconOnly onClick={onClose} />
       </div>
     </div>
   )

@@ -11,6 +11,7 @@ import FluxAgentWorkbench from './workbenches/FluxAgentWorkbench'
 import ARWorkbench from './workbenches/ARWorkbench'
 import CollectionsWorkbench from './workbenches/CollectionsWorkbench'
 import CashLiquidityWorkbench from './workbenches/CashLiquidityWorkbench'
+import JournalWorkbench from './workbenches/JournalWorkbench'
 
 const C = {
   navy: '#1e293b', teal: '#0891b2', bg: '#f8fafc',
@@ -23,7 +24,7 @@ const WORKBENCH_MAP = {
   'Audit Agent':           'controller',
   'Treasurer Workbench':   'treasury',
   'Capital Workbench':     'controller',
-  'Journal Workbench':     'controller',
+  'Journal Workbench':     'journal',
   'Flux Workbench':        'flux',
   'AR Director Workbench': 'ar',
   'Collections Workbench': 'collections',
@@ -190,6 +191,9 @@ export default function ModuleView({ module, onModuleChange }) {
       )}
       {openWorkbench === 'treasury' && (
         <CashLiquidityWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'journal' && (
+        <JournalWorkbench onClose={() => setOpenWorkbench(null)} />
       )}
       {openWorkbench === 'controller' && !isLive && (
         <div style={{

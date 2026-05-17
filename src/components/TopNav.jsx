@@ -25,57 +25,6 @@ export default function TopNav({ activeModule, onModuleChange }) {
       </HeaderName>
 
       <HeaderNavigation aria-label="Finance modules">
-        {/* Finance Atlas */}
-        <HeaderMenuItem
-          isCurrentPage={activeModule === 'atlas'}
-          onClick={() => onModuleChange('atlas')}
-          style={{
-            cursor: 'pointer',
-            borderBottom: activeModule === 'atlas' ? `2px solid ${C.teal}` : '2px solid transparent',
-          }}
-        >
-          <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <span style={{
-              width: 14, height: 14, borderRadius: 3,
-              background: activeModule === 'atlas' ? C.teal : 'rgba(255,255,255,0.15)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 9, flexShrink: 0, color: '#fff', fontWeight: 700,
-            }}>⬡</span>
-            <span style={{ fontWeight: activeModule === 'atlas' ? 600 : 400, fontSize: 13 }}>Finance Atlas</span>
-            <span style={{
-              fontSize: 9, fontWeight: 700, padding: '1px 5px',
-              borderRadius: 10, background: 'rgba(8,145,178,0.2)', color: '#67e8f9',
-              border: '1px solid rgba(103,232,249,0.3)',
-            }}>R2R–FP&A</span>
-          </span>
-        </HeaderMenuItem>
-
-        {/* Procurement Atlas */}
-        <HeaderMenuItem
-          isCurrentPage={activeModule === 'proc-atlas'}
-          onClick={() => onModuleChange('proc-atlas')}
-          style={{
-            cursor: 'pointer',
-            borderBottom: activeModule === 'proc-atlas' ? '2px solid #C41E3A' : '2px solid transparent',
-          }}
-        >
-          <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <span style={{
-              width: 14, height: 14, borderRadius: 3,
-              background: activeModule === 'proc-atlas' ? '#C41E3A' : 'rgba(255,255,255,0.15)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 9, flexShrink: 0, color: '#fff', fontWeight: 700,
-            }}>⬡</span>
-            <span style={{ fontWeight: activeModule === 'proc-atlas' ? 600 : 400, fontSize: 13 }}>Proc Atlas</span>
-            <span style={{
-              fontSize: 9, fontWeight: 700, padding: '1px 5px',
-              borderRadius: 10, background: 'rgba(196,30,58,0.2)', color: '#ff8389',
-              border: '1px solid rgba(255,131,137,0.3)',
-            }}>S2P</span>
-          </span>
-        </HeaderMenuItem>
-
-        {/* Finance modules */}
         {MODULE_ORDER.map(id => {
           const mod = MODULES[id]
           const isLive = mod.wave === 1
@@ -104,6 +53,30 @@ export default function TopNav({ activeModule, onModuleChange }) {
             </HeaderMenuItem>
           )
         })}
+
+        <HeaderMenuItem
+          isCurrentPage={activeModule === 'atlas'}
+          onClick={() => onModuleChange('atlas')}
+          style={{
+            cursor: 'pointer',
+            borderBottom: activeModule === 'atlas' ? `2px solid ${C.teal}` : '2px solid transparent',
+          }}
+        >
+          <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <span style={{
+              width: 14, height: 14, borderRadius: 3,
+              background: activeModule === 'atlas' ? C.teal : 'rgba(255,255,255,0.15)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 9, flexShrink: 0, color: '#fff', fontWeight: 700,
+            }}>⬡</span>
+            <span style={{ fontWeight: activeModule === 'atlas' ? 600 : 400, fontSize: 13 }}>Atlas</span>
+            <span style={{
+              fontSize: 9, fontWeight: 700, padding: '1px 5px',
+              borderRadius: 10, background: 'rgba(8,145,178,0.2)', color: '#67e8f9',
+              border: '1px solid rgba(103,232,249,0.3)',
+            }}>All</span>
+          </span>
+        </HeaderMenuItem>
       </HeaderNavigation>
 
       <HeaderGlobalBar>

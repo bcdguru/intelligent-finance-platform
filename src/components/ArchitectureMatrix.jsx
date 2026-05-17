@@ -29,8 +29,9 @@ const AGENT_META = {
   'Project & Asset Master Agent': { bg: '#defbe6', color: '#0e6027' },
 }
 
-function AgentChip({ name, isWorkbench, onClick }) {
+function AgentChip({ name, isWorkbench, onClick, colColor }) {
   const meta = AGENT_META[name] || { bg: '#e5f6ff', color: '#0072c3' }
+  const chipColor = isWorkbench && colColor ? colColor : meta.color
   if (isWorkbench) {
     return (
       <button
@@ -40,7 +41,7 @@ function AgentChip({ name, isWorkbench, onClick }) {
           display: 'inline-flex', alignItems: 'center', gap: 4,
           padding: '2px 7px', borderRadius: 2,
           fontSize: 10, fontWeight: 600, fontFamily: 'IBM Plex Sans, sans-serif',
-          background: meta.color, color: '#fff',
+          background: chipColor, color: '#fff',
           border: 'none', cursor: 'pointer',
           marginBottom: 3, lineHeight: '18px',
           boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
@@ -67,14 +68,15 @@ function AgentChip({ name, isWorkbench, onClick }) {
   )
 }
 
-function MatrixCell({ cell, onWorkbenchClick }) {
+function MatrixCell({ cell, onWorkbenchClick, colColor }) {
   if (!cell) {
-    return <td style={{ border: '1px solid #e0e0e0', background: '#fafafa', width: 130 }} />
+    return <td style={{ border: '1px solid #e0e0e0', background: '#fafafa', width: 130, borderTop: colColor ? `2px solid ${colColor}30` : undefined }} />
   }
   return (
     <td style={{
       border: '1px solid #e0e0e0',
-      background: '#ffffff',
+      borderTop: colColor ? `2px solid ${colColor}50` : '1px solid #e0e0e0',
+      background: colColor ? `${colColor}06` : '#ffffff',
       padding: '6px 8px',
       verticalAlign: 'top',
       width: 130,
@@ -84,7 +86,7 @@ function MatrixCell({ cell, onWorkbenchClick }) {
           <AgentChip key={a} name={a} isWorkbench={false} />
         ))}
         {cell.workbench && (
-          <AgentChip name={cell.workbench} isWorkbench onClick={onWorkbenchClick} />
+          <AgentChip name={cell.workbench} isWorkbench onClick={onWorkbenchClick} colColor={colColor} />
         )}
       </div>
     </td>
@@ -159,6 +161,7 @@ export default function ArchitectureMatrix({ module, onWorkbenchClick }) {
                   key={area.id}
                   cell={layer.cells[area.id]}
                   onWorkbenchClick={onWorkbenchClick}
+                  colColor={area.color}
                 />
               ))}
             </tr>

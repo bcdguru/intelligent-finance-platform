@@ -3,11 +3,13 @@ import { Theme } from '@carbon/react'
 import TopNav from './components/TopNav'
 import ModuleView from './components/ModuleView'
 import AtlasViewer from './components/AtlasViewer'
+import ProcurementAtlasViewer from './components/ProcurementAtlasViewer'
 import { MODULES } from './data/modules'
 
 export default function App() {
   const [activeModule, setActiveModule] = useState('r2r')
-  const isAtlas = activeModule === 'atlas'
+  const isAtlas      = activeModule === 'atlas'
+  const isProcAtlas  = activeModule === 'proc-atlas'
 
   return (
     <Theme theme="white">
@@ -15,10 +17,11 @@ export default function App() {
         <Theme theme="g100">
           <TopNav activeModule={activeModule} onModuleChange={setActiveModule} />
         </Theme>
-        {isAtlas
-          ? <AtlasViewer key="atlas" />
-          : <ModuleView key={activeModule} module={MODULES[activeModule]} onModuleChange={setActiveModule} />
-        }
+        {isAtlas     && <AtlasViewer key="atlas" />}
+        {isProcAtlas && <ProcurementAtlasViewer key="proc-atlas" />}
+        {!isAtlas && !isProcAtlas && (
+          <ModuleView key={activeModule} module={MODULES[activeModule]} onModuleChange={setActiveModule} />
+        )}
       </div>
     </Theme>
   )

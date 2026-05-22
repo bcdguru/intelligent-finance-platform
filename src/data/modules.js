@@ -396,7 +396,7 @@ export const MODULES = {
         label: 'Action',
         cells: {
           'variance': { agents: ['Variance Agent'], workbench: 'Analyst WB' },
-          'forecast': { agents: ['Forecasting Agent'], workbench: null },
+          'forecast': { agents: ['Forecasting Agent'], workbench: 'Forecast Workbench' },
           'reporting': { agents: ['Reporting Agent'], workbench: null },
           'planning': { agents: ['Planning Agent'], workbench: null },
           'bu-partner': { agents: ['BU Agent'], workbench: null },

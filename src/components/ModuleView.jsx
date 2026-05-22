@@ -15,6 +15,9 @@ import JournalWorkbench from './workbenches/JournalWorkbench'
 import CapitalWorkbench from './workbenches/CapitalWorkbench'
 import BillingWorkbench from './workbenches/BillingWorkbench'
 import CashApplicationWorkbench from './workbenches/CashApplicationWorkbench'
+import FPAAnalystWorkbench from './workbenches/FPAAnalystWorkbench'
+import HeadOfFPAWorkbench from './workbenches/HeadOfFPAWorkbench'
+import ForecastWorkbench from './workbenches/ForecastWorkbench'
 
 const C = {
   navy: '#1e293b', teal: '#0891b2', bg: '#f8fafc',
@@ -33,6 +36,9 @@ const WORKBENCH_MAP = {
   'Collections Workbench':  'collections',
   'Billing Specialist WB':  'billing',
   'Cash Application WB':    'cashapp',
+  'Analyst WB':             'fpaanalyst',
+  'Head of FP&A WB':        'headfpa',
+  'Forecast Workbench':     'forecast',
 }
 
 const MODULE_METRICS = {
@@ -208,6 +214,15 @@ export default function ModuleView({ module, onModuleChange }) {
       )}
       {openWorkbench === 'cashapp' && (
         <CashApplicationWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'fpaanalyst' && (
+        <FPAAnalystWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'headfpa' && (
+        <HeadOfFPAWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'forecast' && (
+        <ForecastWorkbench onClose={() => setOpenWorkbench(null)} />
       )}
       {openWorkbench === 'controller' && !isLive && (
         <div style={{

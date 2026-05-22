@@ -197,7 +197,7 @@ export const MODULES = {
         cells: {
           'billing': { agents: ['Billing Agent'], workbench: 'Billing Specialist WB' },
           'revenue': { agents: ['Contract Agent'], workbench: null },
-          'cash-app': { agents: ['Cash App Agent'], workbench: null },
+          'cash-app': { agents: ['Cash App Agent'], workbench: 'Cash Application WB' },
           'collections': { agents: ['Collections Agent'], workbench: null },
           'ar-mgmt': { agents: ['AR Agent'], workbench: null },
           'contract': { agents: ['Contract Agent'], workbench: null },

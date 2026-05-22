@@ -13,6 +13,8 @@ import CollectionsWorkbench from './workbenches/CollectionsWorkbench'
 import CashLiquidityWorkbench from './workbenches/CashLiquidityWorkbench'
 import JournalWorkbench from './workbenches/JournalWorkbench'
 import CapitalWorkbench from './workbenches/CapitalWorkbench'
+import BillingWorkbench from './workbenches/BillingWorkbench'
+import CashApplicationWorkbench from './workbenches/CashApplicationWorkbench'
 
 const C = {
   navy: '#1e293b', teal: '#0891b2', bg: '#f8fafc',
@@ -27,8 +29,10 @@ const WORKBENCH_MAP = {
   'Capital Workbench':     'capital',
   'Journal Workbench':     'journal',
   'Flux Workbench':        'flux',
-  'AR Director Workbench': 'ar',
-  'Collections Workbench': 'collections',
+  'AR Director Workbench':  'ar',
+  'Collections Workbench':  'collections',
+  'Billing Specialist WB':  'billing',
+  'Cash Application WB':    'cashapp',
 }
 
 const MODULE_METRICS = {
@@ -198,6 +202,12 @@ export default function ModuleView({ module, onModuleChange }) {
       )}
       {openWorkbench === 'capital' && (
         <CapitalWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'billing' && (
+        <BillingWorkbench onClose={() => setOpenWorkbench(null)} />
+      )}
+      {openWorkbench === 'cashapp' && (
+        <CashApplicationWorkbench onClose={() => setOpenWorkbench(null)} />
       )}
       {openWorkbench === 'controller' && !isLive && (
         <div style={{

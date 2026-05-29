@@ -1,0 +1,103 @@
+const r2rConfig = {
+  id: 'r2r',
+  label: 'R2R',
+  fullName: 'Record to Report',
+  tagline: 'Continuous and Compliant Close',
+  color: '#156082',
+  accentColor: '#0F9ED5',
+  wave: 1,
+  processAreas: [
+    { id: 'general-accounting', label: 'General Accounting',    sub: 'Journal Accounting',            color: '#1565C0' },
+    { id: 'capital-accounting', label: 'Capital Accounting',    sub: 'Project, Lease & Asset Mgmt',   color: '#1976D2' },
+    { id: 'controls',           label: 'Controls',              sub: 'Controls & Compliance',          color: '#9B7A00' },
+    { id: 'book-close',         label: 'Book Close & Reporting',sub: 'Close & Consolidations',         color: '#E06020' },
+    { id: 'intercompany',       label: 'Intercompany Mgmt',     sub: 'Intercompany Accounting',        color: '#C41E3A' },
+    { id: 'cash-mgmt',          label: 'Cash Management',       sub: 'Balance Sheet Reconciliations',  color: '#1B5E20' },
+  ],
+  layers: [
+    {
+      id: 'compliance', label: 'Compliance',
+      cells: {
+        'general-accounting': { agents: ['Journal Scheduler'],             workbench: null                },
+        'capital-accounting': { agents: ['Project & Asset Master Agent'],  workbench: null                },
+        'controls':           { agents: ['Control Agent'],                 workbench: 'Audit Agent'        },
+        'book-close':         { agents: ['Reporting Agent'],               workbench: null                },
+        'intercompany':       { agents: ['Interco Agent'],                 workbench: null                },
+        'cash-mgmt':          { agents: ['Reconciliation Agent'],          workbench: null                },
+      },
+    },
+    {
+      id: 'analysis', label: 'Analysis',
+      cells: {
+        'general-accounting': { agents: ['Flux Agent'],                          workbench: 'Flux Workbench'      },
+        'capital-accounting': { agents: ['Asset Agent'],                         workbench: 'Capital Workbench'   },
+        'controls':           { agents: ['Monitor Agent'],                       workbench: null                  },
+        'book-close':         { agents: ['Reporting Agent', 'Forecasting Agent'],workbench: null                  },
+        'intercompany':       { agents: ['Monitor Agent'],                       workbench: null                  },
+        'cash-mgmt':          { agents: ['Cash Agent'],                          workbench: 'Treasurer Workbench' },
+      },
+    },
+    {
+      id: 'orchestration', label: 'Orchestration',
+      cells: {
+        'general-accounting': { agents: ['Orchestration Agent'], workbench: 'Journal Workbench' },
+        'capital-accounting': { agents: ['Capital Spend Agent'], workbench: null                },
+        'controls':           { agents: ['Orchestration Agent'], workbench: null                },
+        'book-close':         { agents: ['Orchestration Agent'], workbench: null                },
+        'intercompany':       { agents: ['Orchestration Agent'], workbench: null                },
+        'cash-mgmt':          { agents: ['Orchestration Agent'], workbench: null                },
+      },
+    },
+    {
+      id: 'action', label: 'Action',
+      cells: {
+        'general-accounting': { agents: ['Journal Agent'],        workbench: 'Journal Advisor' },
+        'capital-accounting': { agents: ['Asset Agent'],          workbench: null              },
+        'controls':           { agents: ['Close Agent'],          workbench: null              },
+        'book-close':         { agents: ['Close Agent'],          workbench: null              },
+        'intercompany':       { agents: ['Interco Agent'],        workbench: null              },
+        'cash-mgmt':          { agents: ['Reconciliation Agent'], workbench: null              },
+      },
+    },
+    {
+      id: 'integration', label: 'Integration',
+      cells: {
+        'general-accounting': { agents: ['Extraction/Data Agent'], workbench: null },
+        'capital-accounting': { agents: ['Extraction/Data Agent'], workbench: null },
+        'controls':           { agents: ['Extraction/Data Agent'], workbench: null },
+        'book-close':         { agents: ['Extraction/Data Agent'], workbench: null },
+        'intercompany':       { agents: ['Extraction/Data Agent'], workbench: null },
+        'cash-mgmt':          { agents: ['Extraction/Data Agent'], workbench: null },
+      },
+    },
+  ],
+  kpis: [
+    { id: 'k1', label: 'Continuous and Compliant Close',                               icon: '⟳', color: '#156082' },
+    { id: 'k2', label: 'Track, Review and Act on Controls',                            icon: '⊕', color: '#A02B93' },
+    { id: 'k3', label: 'Automated, on-time and first time right optimized journals',   icon: '✎', color: '#0F9ED5' },
+    { id: 'k4', label: 'Real time reconciliations with zero B/Sheet Risk',             icon: '⇌', color: '#196B24' },
+    { id: 'k5', label: 'Optimize Cashflows. Real time Visibility',                     icon: '$', color: '#4EA72E' },
+    { id: 'k6', label: 'Digital Project Records. Automated Posting. Zero Delayed WIP', icon: '▣', color: '#E97132' },
+    { id: 'k7', label: 'Digital Contracts and Documents. Auto matching & settlement',  icon: '≡', color: '#0961FD' },
+    { id: 'k8', label: 'No Touch Reports. ON time Submission',                         icon: '⇧', color: '#156082' },
+  ],
+  personas: [
+    { id: 'gl-accountant',  label: 'GL Accountant',                 wave: 1, active: true  },
+    { id: 'controller',     label: 'Controller',                     wave: 1, active: true  },
+    { id: 'audit-mgr',      label: 'Audit & Compliance Manager',     wave: 1, active: true  },
+    { id: 'treasury-analyst',label: 'Treasury Analyst',              wave: 1, active: true  },
+    { id: 'fixed-assets',   label: 'Fixed Assets Accountant',        wave: 2, active: false },
+    { id: 'interco',        label: 'Intercompany Accountant',        wave: 2, active: false },
+    { id: 'tax-accountant', label: 'Tax Accountant',                 wave: 2, active: false },
+    { id: 'reporting-mgr',  label: 'Financial Reporting Manager',    wave: 2, active: false },
+    { id: 'cao',            label: 'CAO',                            wave: 2, active: false },
+  ],
+  skills: [
+    '/draft-journal', '/accrual-reversal-check', '/flux-explainer',
+    '/reconcile-subledger', '/closing-checklist', '/manual-je-review',
+    '/control-exception-triage', '/close-cockpit', '/pbc-list-builder',
+    '/control-evidence-query', '/audit-walkthrough-pack', '/daily-cash-position',
+  ],
+}
+
+export default r2rConfig

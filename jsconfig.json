@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*":   ["src/shared/*"],
+      "@modules/*":  ["src/modules/*"],
+      "@registry":   ["src/registry/index.js"],
+      "@registry/*": ["src/registry/*"],
+      "@shell/*":    ["src/shell/*"]
+    }
+  },
+  "include": ["src"]
+}
